@@ -10,24 +10,29 @@
 - For each visualization (good and bad):  
     - Explain (with reference to material covered up to date, along with readings and other scholarly sources, as needed) why you classified that visualization the way you did.
       ```
-      Your answer...
+      Good visulization example: 
+      https://ourworldindata.org/grapher/temperature-anomaly?time=earliest..2025
+      Based on what I learned from the lecture, the plot in this website satisfy the Aesthetic, Substantive and Perceptual, the plot is beautiful, informative, the data is a 2D time-series form, easy to read and understand the temperature variations.
 
-
-
-
+      Bad visulization example: 
+      https://public.tableau.com/app/profile/bharath.kumar.s.p/viz/GaugeKPI/GaugeKPI?
+      The visualization biuld like a guage style KPI display, the gauge makes me hard to read, I am not sure whether I should read the angle, arc length or the filled area. This is not right based on perceptual principle.
+      And the plot is hard to do comparison, especially it has similar magnitude, people can hardly tell which arc length is larger.
 
 
 
       ```
     - How could this data visualization have been improved?  
       ```
-      Your answer...
+      Good example:
+      Add a clearer legend
+      Add a reference period on the graphic
+      I think the plot is good enough to deliver the information, if add some uncertainty bar would be better for me to understand the variations.
 
-
-
-
-
-
+      Bad example: 
+      We can replace the gauge with a bar chart, with a proper maker, which is easier to read and understand, bar length is better than arc length.
+      Add clear and consistent axes and labels. 
+      Add some interpretaion notes would also help, for example, the data source, terminology definitions. 
       
       ```
 - Word count should not exceed (as a maximum) 500 words for each visualization (i.e. 
