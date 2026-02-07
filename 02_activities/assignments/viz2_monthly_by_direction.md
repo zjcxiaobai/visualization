@@ -7,7 +7,7 @@ Source catalogue entry: City of Toronto Traffic Counts – Cycling.
 (Downloaded resource: `volumes_atr_cyclists_permanent.csv.zip`)
 
 ## What software did you use to create your data visualization?
-Python - I tried R studio and Tableau , fialed to produce plots
+R
 
 ## Who is your intended audience? 
 Toronto risident who bike, students who commute use bike

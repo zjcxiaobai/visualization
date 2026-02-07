@@ -1,29 +1,36 @@
-# 1) read data
-df <- read.csv("volumes_atr_cyclists_permanent.csv", stringsAsFactors = FALSE)
-print(names(df))
-print(dim(df))
+library(readr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
 
-df <- read.csv("volumes_atr_cyclists_permanent.csv", stringsAsFactors = FALSE)
-df$dt <- as.Date(df$dt)
+# read csv 
+df <- read_csv("volumes_atr_cyclists_permanent.csv", show_col_types = FALSE)
 
-# 2) aggregate total volume by location (place-focused)
-tot <- aggregate(volume_daily ~ location, data = df, sum, na.rm = TRUE)
+# read the datetime
+df2 <- df %>%
+  mutate(dt = datetime_bin) %>%  
+  filter(!is.na(dt))
 
-# 3) top 10
-tot <- tot[order(tot$volume_daily, decreasing = TRUE), ]
-top10 <- head(tot, 10)
+# monthly sums per direction
+monthly_dir <- df2 %>%
+  mutate(month = floor_date(dt, unit = "month")) %>%
+  group_by(month, direction) %>%
+  summarise(volume_month = sum(volume_15min, na.rm = TRUE), .groups = "drop") %>%
+  arrange(month)
 
-# 4) bar plot
-png("viz2_top10_locations.png", width = 1200, height = 700, res = 150)
-par(mar = c(5, 18, 4, 2))  # big left margin for long location names
-barplot(
-  top10$volume_daily,
-  names.arg = top10$location,
-  horiz = TRUE,
-  las = 1,
-  main = "Top 10 Cycling Count Locations (Permanent Stations)",
-  xlab = "Total cyclist volume (sum of daily counts)"
-)
-dev.off()
+# build plot object
+p <- ggplot(monthly_dir, aes(x = month, y = volume_month, color = direction)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Monthly Cycling Volume by Direction",
+    x = "Month",
+    y = "Total cyclist volume (sum of 15-min counts)",
+    color = "Direction"
+  ) +
+  theme_minimal()
 
-print(top10)
+# show in R
+print(p)
+
+# save images
+ggsave("monthly_cycling_by_direction.png", plot = p, width = 10, height = 5, dpi = 300)
